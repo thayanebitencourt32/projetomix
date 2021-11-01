@@ -1,0 +1,54 @@
+<p-table [value]="certificados" dataKey="matriculaAluno" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 3rem"></th>
+            <th pSortableColumn="name">Matricula Aluno <p-sortIcon field="name"></p-sortIcon></th>
+            <th>Nome Aluno</th>
+            
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-aluno let-expanded="expanded">
+        <tr>
+            <td>
+                <button type="button" pButton pRipple [pRowToggler]="aluno" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+            </td>
+            <td>{{aluno?.matriculaAluno}}</td>
+            <td>{{aluno?.nomeAluno}}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-aluno>
+        <tr>
+            <td colspan="7">
+                <div class="p-p-3">
+                    <p-table [value]="aluno.documentos" dataKey="id">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="id">Nome <p-sortIcon field="price"></p-sortIcon></th>
+                                <th pSortableColumn="customer">Atividade <p-sortIcon field="customer"></p-sortIcon></th>
+                                <th pSortableColumn="date">Link <p-sortIcon field="date"></p-sortIcon></th>
+                                <th pSortableColumn="amount">Quantidade Horas <p-sortIcon field="amount"></p-sortIcon></th>
+                                <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
+                              
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-documento>
+                            <tr>
+                                <td>{{documento.nome}}</td>
+                                <td>{{documento.atividade}}</td>
+                                <td><p-button type="button" ng-click="abrirLink(documento.link)" >Abrir Documento</p-button></td>
+                                <td>{{documento.qtdHoras}}</td>
+                               <td>{{documento.statusDocumentos}}</td>
+                               
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="6">Não há certificados.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
